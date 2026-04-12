@@ -20,13 +20,14 @@
 <body class="@yield('body-class')" data-userid="{{ auth()->id() }}">
 
     @include('components.navbar')
-    @include('components.footer')
+
  
 
-    <div class="container">
-        @yield('content')
-    </div>
 
+        @yield('content')
+
+
+     @include('components.footer')
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{{ asset('js/app.js') }}?v=2"></script>
     

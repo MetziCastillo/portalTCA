@@ -210,8 +210,8 @@ form {
 #footer {
   background-color: #1E2939; 
   padding-top: 30px;
+  width: 100%;
   margin: 0;
-  overflow: hidden;
 }
 /* contenedores */
 .confter {
@@ -508,9 +508,9 @@ form {
 */
 .otpctner {
   background: #F9FAFB; 
-  padding-top: 90px;  
+  padding-top: 90px; 
+  margin-bottom: 20px ; 
   scroll-margin-top: 90px;
-  height: 100%;
 }
 /* containers */
 .conotp {
