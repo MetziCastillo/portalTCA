@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('title', 'Crear nueva cuenta')
 @section('content')
 
 <br><br><br><br><br><br><br>
