@@ -263,11 +263,20 @@ class AuthController extends Controller
     {
         // Mensajes para validar la informacion de los campos
         $request->validate([
-            'password' => 'required|min:6|confirmed'
+            'password' => [
+                'required',
+                'confirmed',
+                'min:6',
+                'regex:/[a-z]/',
+                'regex:/[A-Z]/',
+                'regex:/[0-9]/',
+                'regex:/[@$!%*#?_&.\-]/'
+            ]
         ], [
             'password.required' => 'La contraseña es obligatoria',
-            'password.min' => 'Debe contener minimo 6 caracteres',
-            'password.confirmed' => 'Deben ser iguales'
+            'password.min' => 'Debe contener mínimo 6 caracteres',
+            'password.confirmed' => 'Deben ser iguales',
+            'password.regex' => 'Debe incluir mayúscula, minúscula, número y símbolo'
         ]);
 
         $user = User::find(session('reset_user_id'));
@@ -300,7 +309,18 @@ class AuthController extends Controller
     {
         $request->validate([
             'usuario' => 'required|email',
-            'password' => 'required|min:6'
+            'password' => [
+                'required',
+                'min:6',
+                'regex:/[a-z]/',
+                'regex:/[A-Z]/',
+                'regex:/[0-9]/',
+                'regex:/[@$!%*#?_&.\-]/'
+            ]
+        ], [
+            'password.required' => 'La contraseña es obligatoria',
+            'password.min' => 'Debe tener mínimo 6 caracteres',
+            'password.regex' => 'Debe incluir mayúscula, minúscula, número y símbolo'
         ]);
 
         $existente = User::where('usuario', $request->usuario)->first();
