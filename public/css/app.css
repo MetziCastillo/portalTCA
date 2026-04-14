@@ -823,9 +823,9 @@ a.button-cc {
 }
 
 
-/* ###############       ############### 
-   ############### HOME  ############### 
-   ###############       ############### 
+/* ############### 
+   ############### HOME 
+   ############### 
 */
 
 #Inicio {
@@ -835,12 +835,12 @@ a.button-cc {
   scroll-margin-top: 90px;
 }
 
-
 .containerhome {
   display: flex;
   flex-direction: row;
   align-items: center;
 }
+
 @media (max-width: 600px) {
   .containerhome {
     flex-direction: column;
@@ -854,14 +854,15 @@ a.button-cc {
   margin: 3%;
   gap: 20px; 
 }
+
 .contau2 {
   display: flex;
   justify-content: center;
   align-items: center;
   margin-top: 8%;
 }
-.imgpc {
 
+.imgpc {
   max-width: 90%;
   height: auto;
   border-radius: 16px;
@@ -873,60 +874,84 @@ a.button-cc {
   }
 } 
 
-/* textos  */
+/* Textos */
 .slogan {
   font-size: 3.70em;
   color: #101828;
   line-height: 1;
-
   font-family: "Noto Sans Bengali", sans-serif;
   font-weight: 900;
   letter-spacing: -0.025em; 
 } 
+
 .txt-blue {
   color: #79EFF7; 
 }
+
 .txtsubtitles {
   color: #6A7282;
   font-family: "Inter", sans-serif;
   font-size: 1.25em;
 }
+
+/* ############### 
+   ESTILOS DE BOTONES (Actualizados para a href)
+   ############### 
+*/
+
 .btn-fp {
-  font-size: 1.125em;
-  font-family: "Inter", sans-serif;
-  font-weight: 500;
-
-}
-
-@media (max-width: 600px) {
-  .slogan {
-    font-size: 2em; 
-}
-.txtsubtitleslogan {
-    font-size: 1em; 
-  }
-}
-
-/* Botones */
-.btn-fp {
+  /* Estructura para Links */
+  display: inline-flex;    /* Permite usar ancho/alto y alinear contenido */
+  align-items: center;     /* Centrado vertical del texto e icono */
+  justify-content: center; /* Centrado horizontal */
+  text-decoration: none;   /* Quita el subrayado del enlace */
+  
+  /* Dimensiones */
   background-color: #79EFF7;
   width: 100%;        
   max-width: 300px;   
   height: 60px;       
   border: none;
   border-radius: 8px;
+  
+  /* Tipografía */
+  color: #101828;
+  font-family: "Inter", sans-serif;
   font-size: 16px;
+  font-weight: 500;
+  text-align: center;
+  gap: 10px;               /* Espacio entre texto y SVG */
+  
   cursor: pointer;
+  transition: all 0.2s ease;
 }
+
 .btn-fp:hover {
   background-color: #87C8CD;
+  transform: translateY(-2px); /* Pequeño efecto al pasar el mouse */
 }
+
+/* Variante Azul / Secundaria */
 .btn-fp.blue {
   background-color: #DAEEF0;
+  color: #445C5E;
 }
+
 .btn-fp.blue:hover {
   background-color: #C2E3E6;
 }
+
+/* Alineación de iconos dentro de botones */
+.btn-fp svg {
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.btn-fp:hover svg {
+  transform: translateX(4px); /* Anima la flecha hacia la derecha */
+}
+
+/* Contenedor de botones */
 .ctnerbutton {
   width: 65%; 
   display: flex;
@@ -934,7 +959,16 @@ a.button-cc {
   gap: 12px;
   margin-top: 20px; 
 }
+
 @media (max-width: 600px) {
+  .slogan {
+    font-size: 2em; 
+  }
+  
+  .txtsubtitleslogan {
+    font-size: 1em; 
+  }
+
   .ctnerbutton {
     width: 100%;           
     justify-content: flex-start; 
