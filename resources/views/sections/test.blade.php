@@ -50,7 +50,7 @@
                 </div>
 
                 <div class="test-flex-buttons">
-                    <a href="#" class="test-btn-cyan">Ver Recursos de Ayuda</a>
+                    <a href="#Ayuda" class="test-btn-cyan">Ver Recursos de Ayuda</a>
                     <button id="btn-restart" class="test-btn-ghost">
                         Repetir Test
                     </button>

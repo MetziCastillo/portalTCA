@@ -58,6 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
     input.addEventListener('input', () => {
         input.value = input.value.replace(/\D/g, '').slice(0, 6);
     });
+
     });
     // Manejo de errores en login
     const inputs = document.querySelectorAll('.input-lg');
@@ -202,6 +203,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     localStorage.setItem("flow", "reset");
                     window.location.href = "/forgot-password";
                 } else {
+                    mensaje.style.display = "block";
                     mensaje.innerText = json.message;
                 }
             } catch (error) {
@@ -288,6 +290,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     }
 
                 } else {
+                    mensaje.style.display = "block";
                     mensaje.innerText = json.message;
                 }
             } catch (error) {
@@ -330,6 +333,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     resendBtn.disabled = true;
                     setTimeout(() => { resendBtn.disabled = false; }, 30000);
                 } else {
+                    mensaje.style.display = "block";
                     mensaje.innerText = json.message;
                 }
             } catch (error) {
