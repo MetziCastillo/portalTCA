@@ -12,12 +12,12 @@
 
       <!-- buttons -->
       <div class="ctnerbutton">
-        <button class="btn-fp">Buscar Ayuda</button>
-        <button class="btn-fp blue">Saber Más
+        <a href="{{ request()->is('/') ? '#Ayuda' : route('home') . '#Ayuda' }}" class="btn-fp">Buscar Ayuda</a>
+          <a href="{{ request()->is('/') ? '#Sobre-TCA' : route('home') . '#Sobre-TCA' }}" class="btn-fp blue">Saber más
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#445C5E" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right-icon lucide-arrow-right"><path d="M5 12h14"/>
                 <path d="m12 5 7 7-7 7"/>
             </svg>
-        </button>
+        </a>
       </div>
     </div>
 
