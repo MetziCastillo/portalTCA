@@ -11,7 +11,7 @@
             <h2 class="text-t-lg">Bienvenido de nuevo</h2>
             <p class="text-s-l">Accede a tu cuenta para participar en el foro</p>
 
-            <form id="loginForm" class="login-f" method="POST">
+            <form id="loginForm" class="login-f" method="POST" action="/login">
                 @csrf
                 <div class="inps-ctner-login">
                     <div class="ip-lg">

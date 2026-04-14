@@ -822,12 +822,10 @@ a.button-cc {
   }
 }
 
-
-/* ############### 
-   ############### HOME 
-   ############### 
+/* ###############           ############### 
+   ############### HOME      ############### 
+   ###############           ############### 
 */
-
 #Inicio {
   background: #EEF9FB; 
   background: linear-gradient(90deg, rgba(238, 249, 251, 1) 0%, rgba(255, 255, 255, 1) 100%);
@@ -872,7 +870,7 @@ a.button-cc {
   .imgpc {
     max-width: 300px; 
   }
-} 
+}
 
 /* Textos */
 .slogan {
@@ -882,7 +880,7 @@ a.button-cc {
   font-family: "Noto Sans Bengali", sans-serif;
   font-weight: 900;
   letter-spacing: -0.025em; 
-} 
+}
 
 .txt-blue {
   color: #79EFF7; 
@@ -894,44 +892,35 @@ a.button-cc {
   font-size: 1.25em;
 }
 
-/* ############### 
-   ESTILOS DE BOTONES (Actualizados para a href)
-   ############### 
-*/
-
+/* Botones */
 .btn-fp {
-  /* Estructura para Links */
-  display: inline-flex;    /* Permite usar ancho/alto y alinear contenido */
-  align-items: center;     /* Centrado vertical del texto e icono */
-  justify-content: center; /* Centrado horizontal */
-  text-decoration: none;   /* Quita el subrayado del enlace */
-  
-  /* Dimensiones */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+
   background-color: #79EFF7;
-  width: 100%;        
-  max-width: 300px;   
-  height: 60px;       
+  width: 100%;
+  max-width: 300px;
+  height: 60px;
   border: none;
   border-radius: 8px;
-  
-  /* Tipografía */
+
   color: #101828;
   font-family: "Inter", sans-serif;
   font-size: 16px;
   font-weight: 500;
-  text-align: center;
-  gap: 10px;               /* Espacio entre texto y SVG */
-  
+  gap: 10px;
+
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
 .btn-fp:hover {
   background-color: #87C8CD;
-  transform: translateY(-2px); /* Pequeño efecto al pasar el mouse */
+  transform: translateY(-2px);
 }
 
-/* Variante Azul / Secundaria */
 .btn-fp.blue {
   background-color: #DAEEF0;
   color: #445C5E;
@@ -941,45 +930,45 @@ a.button-cc {
   background-color: #C2E3E6;
 }
 
-/* Alineación de iconos dentro de botones */
 .btn-fp svg {
   flex-shrink: 0;
   transition: transform 0.2s ease;
 }
 
 .btn-fp:hover svg {
-  transform: translateX(4px); /* Anima la flecha hacia la derecha */
+  transform: translateX(4px);
 }
 
 /* Contenedor de botones */
 .ctnerbutton {
-  width: 65%; 
+  width: 65%;
   display: flex;
   flex-direction: row;
   gap: 12px;
-  margin-top: 20px; 
+  margin-top: 20px;
 }
 
 @media (max-width: 600px) {
   .slogan {
-    font-size: 2em; 
+    font-size: 2em;
   }
-  
+
   .txtsubtitleslogan {
-    font-size: 1em; 
+    font-size: 1em;
   }
 
   .ctnerbutton {
-    width: 100%;           
-    justify-content: flex-start; 
-    flex-direction: column;      
-    gap: 12px;                 
+    width: 100%;
+    justify-content: flex-start;
+    flex-direction: column;
+    gap: 12px;
   }
 
   .btn-fp {
-    max-width: 100%;     
+    max-width: 100%;
   }
 }
+
 
 /* ###############           ############### 
    ############### ABOUT TCA ############### 
@@ -1369,7 +1358,7 @@ a.button-cc {
    ###############       ############### 
 */
 .foro-body {
-  padding-top: 70px;
+  padding-top: 85px;
   background-color: #F9FAFB;
 }
 /* Contenedores */
@@ -1642,110 +1631,6 @@ a.button-cc {
   text-align: center;
   padding: 0px;
 }
-@media (max-width: 992px) {
-
-  .ctnerforo {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .categoryn,
-  .normasf,
-  .cardcomment,
-  .buscador,
-  .newcomment {
-    width: 95%;
-  }
-
-  .cnerforou1.c2 {
-    width: 95%;
-  }
-
-  .breadcrumbs {
-    flex-wrap: wrap;
-    font-size: 13px;
-  }
-
-  .breadcrumbs a {
-    margin-left: 10px;
-  }
-}
-
-/* Móviles grandes */
-@media (max-width: 768px) {
-
-  .ctnerforo {
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  .foroctner {
-    width: 100%;
-    padding: 0 10px;
-  }
-
-  .categoryn,
-  .normasf,
-  .cardcomment,
-  .buscador,
-  .newcomment {
-    width: 100%;
-  }
-
-  .cnerforou1.c2 {
-    flex-direction: column;
-    align-items: flex-start;
-    width: 100%;
-  }
-
-  .ctnertop,
-  .uht,
-  .card-btm {
-    flex-direction: row;
-    align-items: flex-start;
-    gap: 8px;
-  }
-
-  /* Tipografías */
-  .txt-card-title { font-size: 0.95em; }
-  .txt-card-user { font-size: 0.7em; }
-  .txt-card-cont { font-size: 0.95em; }
-  .txtsubtitles.s3 { font-size: 1em; }
-  .txtsubtitles.s4 { font-size: 1em; }
-
-  .categories-text {
-    padding: 15px 0;
-  }
-
-  .breadcrumbs {
-    font-size: 12px;
-    padding: 8px;
-  }
-}
-
-/* Móviles pequeños */
-@media (max-width: 480px) {
-
-  .txt-card-title { font-size: 0.9em; }
-  .txt-card-cont { font-size: 0.9em; }
-  .txt-card-mini { font-size: 0.8em; }
-
-  .categories-text {
-    gap: 6px;
-  }
-
-  .buscador {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 6px;
-  }
-
-  .newcomment {
-    flex-direction: row;
-    gap: 6px;
-    padding: 10px;
-  }
-}
 
 /* formulario nuevo comentario */
 
@@ -1845,6 +1730,119 @@ background-color: #F3F4F6;
 .btn-cancelar:active {
     transform: scale(0.98);    
     background-color: #D1D5DB;
+}
+/* Responsive */
+@media (max-width: 900px) {
+
+  .foro-body{
+      padding-top: 55px;
+  }
+
+  .ctnerforo {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .categoryn,
+  .normasf,
+  .cardcomment,
+  .buscador,
+  .newcomment {
+    width: 95%;
+  }
+
+  .cnerforou1.c2 {
+    width: 95%;
+  }
+
+  .breadcrumbs {
+    flex-wrap: wrap;
+    font-size: 13px;
+    padding: 8px;
+  }
+
+  .breadcrumbs a {
+    margin-left: 10px;
+  }
+
+  /* Tipografías */
+  .txt-card-title { font-size: 0.95em; }
+  .txt-card-user { font-size: 0.75em; }
+  .txt-card-cont { font-size: 0.95em; }
+  .txtsubtitles.s3 { font-size: 1.05em; }
+  .txtsubtitles.s4 { font-size: 1.05em; }
+
+  .categories-text {
+    padding: 18px 0;
+  }
+}
+@media (max-width: 600px) {
+    .foro-body{
+      padding-top: 65px;
+  }
+
+  .ctnerforo {
+    flex-direction: column;
+    gap: 15px;
+    padding: 0 10px;
+  }
+
+  .foroctner {
+    width: 100%;
+  }
+
+  .categoryn,
+  .normasf,
+  .cardcomment,
+  .buscador,
+  .newcomment {
+    width: 100%;
+  }
+
+  .cnerforou1.c2 {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .ctnertop,
+  .uht,
+  .card-btm {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  /* Tipografías móviles */
+  .txt-card-title { font-size: 0.9em; }
+  .txt-card-user { font-size: 0.7em; }
+  .txt-card-cont { font-size: 0.9em; }
+  .txt-card-mini { font-size: 0.8em; }
+  .txtsubtitles.s3 { font-size: 1em; }
+  .txtsubtitles.s4 { font-size: 1em; }
+
+  .categories-text {
+    padding: 12px 0;
+    gap: 6px;
+  }
+
+  .buscador {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .newcomment {
+    flex-direction: row;
+    gap: 6px;
+    padding: 10px;
+  }
+
+  .breadcrumbs {
+    font-size: 12px;
+    padding: 6px;
+  }
 }
 
 /* ###############       ############### 
