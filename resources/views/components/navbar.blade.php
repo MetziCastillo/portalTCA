@@ -19,7 +19,7 @@
   <ul class="nav-links">
     <li><a href="{{ request()->is('/') ? '#Inicio' : route('home') }}" class="nav_link">Inicio</a></li>
     <li><a href="{{ request()->is('/') ? '#Sobre-TCA' : route('home') . '#Sobre-TCA' }}" class="nav_link">Sobre TCA</a></li>
-    <li><a href="" class="nav_link fz">Test</a></li>
+    <li><a href="{{ request()->is('/') ? '#Test' : route('home') . '#Test' }}" class="nav_link fz">Test</a></li>
     <li><a href="{{ route('foro') }}" class="nav_link">Foro</a></li>
     <li><a href="{{ request()->is('/') ? '#Tipos' : route('home') . '#Tipos' }}" class="nav_link">Tipos</a></li>
         <li><a href="{{ request()->is('/') ? '#Síntomas' : route('home') . '#Síntomas' }}" class="nav_link">Síntomas</a></li>

@@ -59,6 +59,96 @@ document.addEventListener("DOMContentLoaded", () => {
         input.value = input.value.replace(/\D/g, '').slice(0, 6);
     });
     });
+    // Manejo de errores en login
+    const inputs = document.querySelectorAll('.input-lg');
+    inputs.forEach(input => {
+        input.addEventListener('input', () => {
+            // Esto oculta el mensaje de error de Laravel cuando el usuario corrige
+            const laravelError = document.querySelector('.text-danger');
+            if (laravelError) laravelError.style.display = 'none';
+        });
+    });
+
+    // Test
+    const questions = [
+        "¿Te provocas el vómito porque te sientes insoportablemente lleno/a?",
+        "¿Te preocupa haber perdido el control sobre la cantidad de comida que ingieres?",
+        "¿Has perdido más de 6 kg en un período de 3 meses recientemente?",
+        "¿Crees que estás gordo/a aunque los demás digan que estás demasiado delgado/a?",
+        "¿Dirías que la comida domina tu vida?"
+    ];
+
+    let currentStep = 0;
+    let score = 0;
+
+    const viewStart = document.getElementById('view-start');
+    const viewQuestions = document.getElementById('view-questions');
+    const viewResults = document.getElementById('view-results');
+
+    // Verificar que los elementos existan antes de añadir el listener
+    if (document.getElementById('btn-start')) {
+        document.getElementById('btn-start').addEventListener('click', () => {
+            switchView('questions');
+            updateUI();
+        });
+    }
+
+    if (document.getElementById('btn-restart')) {
+        document.getElementById('btn-restart').addEventListener('click', () => {
+            currentStep = 0;
+            score = 0;
+            switchView('start');
+        });
+    }
+
+    window.handleAnswer = function(isYes) {
+        if (isYes) score++;
+        if (currentStep < questions.length - 1) {
+            currentStep++;
+            updateUI();
+        } else {
+            finishTest();
+        }
+    };
+
+    function updateUI() {
+        document.getElementById('question-text').innerText = questions[currentStep];
+        const progress = (currentStep / questions.length) * 100;
+        document.getElementById('progress-fill').style.width = `${progress}%`;
+        document.getElementById('question-number').innerText = `Pregunta ${currentStep + 1} de 5`;
+        document.getElementById('progress-percent').innerText = `${Math.round(progress)}% completado`;
+    }
+
+    function finishTest() {
+        switchView('results');
+        const isHighRisk = score >= 2;
+        const icon = document.getElementById('result-icon-wrapper');
+        const box = document.getElementById('result-message-box');
+        
+        if (isHighRisk) {
+            icon.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="#FF6900" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-triangle-alert-icon lucide-triangle-alert"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>';
+            box.className = "test-message-card risk-high";
+            document.getElementById('result-status-title').innerText = "Posibles indicadores de riesgo detectados";
+            document.getElementById('result-description').innerText = "Tus respuestas sugieren que podrías estar experimentando síntomas relacionados con un Trastorno de la Conducta Alimentaria.";
+            document.getElementById('result-status-title p2').innerText = "Recomendación:";
+            document.getElementById('result-description p2').innerText = "Te recomendamos encarecidamente que consultes con un profesional de la salud (médico de cabecera o psicólogo) para una evaluación adecuada. No tengas miedo de pedir ayuda.";
+        } else {
+            icon.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="#00C950" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-check-big-icon lucide-circle-check-big"><path d="M21.801 10A10 10 0 1 1 17 3.335"/><path d="m9 11 3 3L22 4"/></svg>';
+            box.className = "test-message-card risk-low";
+            document.getElementById('result-status-title').innerText = "Bajo riesgo detectado";
+            document.getElementById('result-description').innerText = "Tus respuestas no indican síntomas claros de un TCA según este cuestionario básico. Sin embargo, si sientes malestar con tu cuerpo o tu alimentación, siempre es buena idea hablar con un profesional.";
+            document.getElementById('result-status-title p2').innerText = "";
+            document.getElementById('result-description p2').innerText = "";
+        }
+    }
+
+    function switchView(view) {
+        if (!viewStart || !viewQuestions || !viewResults) return;
+        [viewStart, viewQuestions, viewResults].forEach(v => v.classList.remove('view-active'));
+        if (view === 'start') viewStart.classList.add('view-active');
+        if (view === 'questions') viewQuestions.classList.add('view-active');
+        if (view === 'results') viewResults.classList.add('view-active');
+    }
 
     // Login
     const formLogin = document.getElementById("loginForm");
