@@ -53,7 +53,27 @@ class AuthController extends Controller
         session()->save();
 
         try {
-            Mail::raw("Tu código de verificación es: $otp", function ($message) use ($request) {
+            $contenido = "
+Tu código de verificación es: $otp
+
+Este código tiene una vigencia de 5 minutos.
+
+--------------------------------------------------
+
+AVISO DE PRIVACIDAD Y CONFIDENCIALIDAD
+
+LEY FEDERAL DE PROTECCION DE DATOS PERSONALES.- Portal TCA con domicilio en ----, codigo postal ----, Delegacion ----,  Ciudad de México, le informa que los datos perosnales que reciba de PortalTCA en calidad de encargado, deben ser tratados conforme al Aviso de Privacidad Integral de PortalTCA puesto a disposicion del titular previo a la captacion de los datos; asi mismo la recepcion de datos personales en PortalTCA se efectua en el entendido de que usted obtuvo previamente conosimiento de los titulares mismos.
+
+El tratamiento de los datos perosonales en PortalTCA se realiza de conformidad del Avidso de Privacidad Integral que se encuentra disponible en la pagina de https://portaltca.infinityfree.me/ en la seccion de avisos de privacidad.
+
+La informacion contenida en este mensaje en confidencial y restringida, y esta destinada unicamente para el uso de la persona que se dirige. Por lo tanto, queda prohibido el uso a persona ajena al destinatario indicado y/o para fines diferentes a los que se expresan en este mensaje. Por lo que, cualquier uso distinto al expresamente autorizado o por persona distinta el destinatario, esta estrictamente prohibido; de tal forma que PortalTCA, no se hace responsable de dichos usos y se reserva cualquier tipo de accion legal que pudiera derivar contra quien, o quienes, resulten responsables de su divulgacion, reprodiccion o uso, sin previa autorizacion por escrito por parte de PortalTCA.
+
+Este mensaje no tiene como propocito, entre el destinatario y el remitente, el uso de practicas anticompetitivas referidas a o señaladas por la Ley Federal de Competencia Economica relacionadas con la fijacion de precios o condiciones que impliquen barreras de entrada; o bien, el desplazamiento de competidores al asegurador, ni establecer un poder sustancial conjunto entre el destinatario y el remitente.
+
+Este mensaje fue generado automáticamente; favor de no responder directamente a este correo.
+            ";
+
+            Mail::raw($contenido, function ($message) use ($request) {
                 $message->to($request->email)
                         ->subject('Código de verificación');
             });
@@ -198,7 +218,7 @@ class AuthController extends Controller
         session()->save();
 
         // Enviar correo
-        Mail::raw("Tu código OTP es: $otp", function ($message) use ($request) {
+        Mail::raw("Tu código de verificacion es: $otp", function ($message) use ($request) {
             $message->to($request->usuario)
                     ->subject('Recuperación de contraseña');
         });
@@ -359,7 +379,7 @@ class AuthController extends Controller
 
         // Enviar OTP
         try {
-            Mail::raw("Tu código OTP es: $otp", function ($message) use ($request) {
+            Mail::raw("Tu código de verificacion es: $otp", function ($message) use ($request) {
                 $message->to($request->usuario)
                         ->subject('Registro de cuenta');
             });
