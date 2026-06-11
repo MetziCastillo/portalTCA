@@ -26,7 +26,8 @@
     Header set Strict-Transport-Security "max-age=31536000; includeSubDomains"
 
     # 2. Protección CSP (Mitiga XSS) 
-    Header set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://code.jquery.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;"
+    Header set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://code.jquery.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; img-src 'self' data: https:;"
+
     # 3. Anti-Clickjacking (Impide que metan tu web en iframes externos)
     Header set X-Frame-Options "DENY"
 
