@@ -22,12 +22,32 @@ document.addEventListener("DOMContentLoaded", () => {
                     'Content-Type': 'application/json'
                 }
             })
-            .then(res => res.json())
-            .then(data => {
-                document.getElementById(`likes-${postId}`).innerText = data.total;
-            });
+                .then(res => res.json())
+                .then(data => {
+                    document.getElementById(`likes-${postId}`).innerText = data.total;
+                });
         });
     });
+
+    //BOTÓN PARA DESPLEGAR CUANDO HAY AUTENTICADO 
+        const carduser = document.getElementById('openOpcions');
+        const userOptions = document.getElementById('userOptions');
+
+        if (carduser && userOptions) {
+            // 1. Abre y cierra el menú al hacer clic en el botón
+            carduser.addEventListener('click', (event) => {
+                event.stopPropagation(); // Evita que el evento se propague al document
+                userOptions.classList.toggle('hidden');
+            });
+
+            // 2. Si el menú está abierto y hacen clic fuera, se cierra solo
+            document.addEventListener('click', (event) => {
+                if (!userOptions.contains(event.target) && !carduser.contains(event.target)) {
+                    userOptions.classList.add('hidden');
+                }
+            });
+        }
+
 
     // CATEGORIAS PARA COMENTARIOS
     const modal = document.getElementById('newcommentform');
@@ -51,13 +71,13 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         };
     }
-        //NÚMEROS SOLO VÁLIDOS PARA INPUT OTP  
+    //NÚMEROS SOLO VÁLIDOS PARA INPUT OTP  
     const otps = document.querySelectorAll('.ipcdv');
 
     otps.forEach(input => {
-    input.addEventListener('input', () => {
-        input.value = input.value.replace(/\D/g, '').slice(0, 6);
-    });
+        input.addEventListener('input', () => {
+            input.value = input.value.replace(/\D/g, '').slice(0, 6);
+        });
 
     });
     // Manejo de errores en login
@@ -102,7 +122,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    window.handleAnswer = function(isYes) {
+    window.handleAnswer = function (isYes) {
         if (isYes) score++;
         if (currentStep < questions.length - 1) {
             currentStep++;
@@ -125,7 +145,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const isHighRisk = score >= 2;
         const icon = document.getElementById('result-icon-wrapper');
         const box = document.getElementById('result-message-box');
-        
+
         if (isHighRisk) {
             icon.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="#FF6900" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-triangle-alert-icon lucide-triangle-alert"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>';
             box.className = "test-message-card risk-high";
@@ -188,14 +208,14 @@ document.addEventListener("DOMContentLoaded", () => {
                     }
                     return;
                 }
-                
+
                 const json = await response.json();
                 if (json.success) {
                     localStorage.clear();
 
                     localStorage.setItem("email", formLogin.querySelector("[name='email']").value);
-                    window.location.href="/otp";
-                } else if(json.disabled){
+                    window.location.href = "/otp";
+                } else if (json.disabled) {
                     alert("Tu cuenta está desactivada. Debes recuperarla.");
                     localStorage.clear();
 
@@ -247,7 +267,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (email) {
                 datos.append("email", email);
             }
-            
+
 
             try {
                 let url = "/verify-otp";
@@ -280,10 +300,10 @@ document.addEventListener("DOMContentLoaded", () => {
                     if (flow === "register") {
                         localStorage.removeItem("flow");
                         window.location.href = "/login";
-                    } 
+                    }
                     else if (flow === "reset") {
                         window.location.href = "/forgot-password";
-                    } 
+                    }
                     else {
                         localStorage.removeItem("flow");
                         window.location.href = "/foro";
@@ -314,11 +334,11 @@ document.addEventListener("DOMContentLoaded", () => {
             try {
                 let url = "/resend-otp";
 
-                    if (localStorage.getItem("flow") === "register") {
-                        url = "/resend-otp-register";
-                    }
+                if (localStorage.getItem("flow") === "register") {
+                    url = "/resend-otp-register";
+                }
 
-                    const response = await fetch(url, {
+                const response = await fetch(url, {
                     method: "POST",
                     credentials: "same-origin",
                     headers: {
@@ -429,45 +449,41 @@ document.addEventListener("DOMContentLoaded", () => {
                     'Content-Type': 'application/json'
                 }
             })
-            .then(res => res.json())
-            .then(data => {
-                if (data.success) {
-                    this.closest('.cardcomment').remove();
-                }
-            });
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        this.closest('.cardcomment').remove();
+                    }
+                });
         });
     });
 
     // Boton de editar (Admin)
-    window.editar = function(id)
-    {
+    window.editar = function (id) {
         document.getElementById('view' + id).style.display = 'none';
         document.getElementById('edit' + id).style.display = 'table-row';
     }
 
     // Boton de cancelar (Admin)
-    window.cancelar = function(id)
-    {
+    window.cancelar = function (id) {
         document.getElementById('view' + id).style.display = 'table-row';
         document.getElementById('edit' + id).style.display = 'none';
     }
 
     // Crear user (Admin)
-    window.crearUsuario = function()
-    {
+    window.crearUsuario = function () {
         let fila = document.getElementById('createRow');
 
-        if(fila){
+        if (fila) {
             fila.style.display = 'table-row';
         }
     }
 
     // Cancelar creacion de user (Admin)
-    window.cancelarCrear = function()
-    {
+    window.cancelarCrear = function () {
         let fila = document.getElementById('createRow');
 
-        if(fila){
+        if (fila) {
             fila.style.display = 'none';
         }
     }
