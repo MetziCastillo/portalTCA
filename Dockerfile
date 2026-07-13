@@ -25,3 +25,12 @@ RUN curl -sS https://getcomposer.org/installer | php \
     && mv composer.phar /usr/local/bin/composer
 
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+
+RUN apt-get update && apt-get install -y \
+    nodejs \
+    npm \
+    libzip-dev \
+    zip \
+    unzip \
+    git \
+    && docker-php-ext-install zip

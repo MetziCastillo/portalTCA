@@ -5,8 +5,9 @@ services:
     build: .
     ports:
       - "8000:80"
-    # volumes:
-    #   - .:/var/www/html
+      - "5173:5173"
+    volumes:
+      - .:/var/www/html
     depends_on:
       - db
 
@@ -18,7 +19,7 @@ services:
     ports:
       - "3306:3306"
     volumes:
-        - mysql_data:/var/lib/mysql
+      - mysql_data:/var/lib/mysql
 
 volumes:
   mysql_data:
