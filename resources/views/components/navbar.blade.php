@@ -30,10 +30,6 @@
           <circle cx="11" cy="11" r="8" />
         </svg>
       </a>
-
-      <input type="text" id="globalSearch" placeholder="Buscar..." style="display:none;">
-      <button id="btnUpSearch" style="display:none;" type="button" onclick="moverBusqueda(-1)">▲</button>
-      <button id="btnDownSearch" style="display:none;" type="button" onclick="moverBusqueda(1)">▼</button>
     </li>
 
     <!-- CARD EN DONDE SE ABREN LAS OPCIONES DEL USUARIO -->
@@ -164,5 +160,18 @@
       </a>
     </li>
   </ul>
+
+  <div id="navbarSearchOverlay" class="navbar-search-overlay" style="display: none;">
+    <div class="navbar-search-container">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#99A1AF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m21 21-4.34-4.34"/>
+        <circle cx="11" cy="11" r="8"/>
+      </svg>
+
+      <input type="text" id="globalSearch" placeholder="Buscar información, síntomas, recursos...">
+
+      <button type="button" class="navbar-search-close" onclick="toggleBuscadorNavbar()">×</button>
+    </div>
+  </div>
 
 </nav>

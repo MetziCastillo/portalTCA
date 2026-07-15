@@ -11,7 +11,11 @@ class AdminController extends Controller
 {
     private function validarAdmin()
     {
-        if (!auth()->check() || auth()->user()->tipo_usuario != 1) {
+        if (!auth()->check()) {
+            return redirect('/login')->send();
+        }
+
+        if (auth()->user()->tipo_usuario != 1) {
             abort(403, 'Acceso denegado');
         }
     }
@@ -50,7 +54,11 @@ class AdminController extends Controller
 
         $usuarios = $query->orderBy('id', 'asc')->paginate(10)->withQueryString();
 
-        return view('admin.dashboard', compact('usuarios'));
+        return response()
+            ->view('admin.dashboard', compact('usuarios'))
+            ->header('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0')
+            ->header('Pragma', 'no-cache')
+            ->header('Expires', '0');
     }
 
     public function update(Request $request, $id)
@@ -95,13 +103,17 @@ class AdminController extends Controller
 
         $temas = Foro::where('id_usuario', $id)->get();
 
-        return view('admin.user-view', compact('usuario', 'temas'));
+        return response()
+            ->view('admin.user-view', compact('usuario', 'temas'))
+            ->header('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0')
+            ->header('Pragma', 'no-cache')
+            ->header('Expires', '0');
     }
 
     public function createUser(Request $request)
     {
         $request->validate([
-            'usuario' => 'required|email|unique:users,usuario',
+            'usuario' => 'required|email|unique:users,usuario|max:100',
             'password' => 'required|min:6',
             'tipo_usuario' => 'required',
             'activo' => 'required'
