@@ -528,26 +528,22 @@ document.addEventListener("DOMContentLoaded", () => {
     let indiceBusqueda = -1;
 
     window.toggleBuscadorNavbar = function () {
+        const overlay = document.getElementById("navbarSearchOverlay");
         const input = document.getElementById("globalSearch");
-        const up = document.getElementById("btnUpSearch");
-        const down = document.getElementById("btnDownSearch");
 
-        if (!input) return;
+        if (!overlay || !input) return;
 
-        if (input.style.display === "none" || input.style.display === "") {
-            input.style.display = "inline-block";
+        const abierto = overlay.style.display === "flex";
 
-            if (up) up.style.display = "inline-block";
-            if (down) down.style.display = "inline-block";
-            input.focus();
-        } else {
-            input.style.display = "none";
-
-            if (up) up.style.display = "none";
-            if (down) down.style.display = "none";
-
+        if (abierto) {
+            overlay.style.display = "none";
+            overlay.classList.remove("active");
             input.value = "";
             limpiarMarcadosBusqueda();
+        } else {
+            overlay.style.display = "flex";
+            overlay.classList.add("active");
+            input.focus();
         }
     };
 

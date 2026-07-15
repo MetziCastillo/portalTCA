@@ -192,7 +192,7 @@ Este mensaje fue generado automáticamente; favor de no responder directamente a
     public function sendOtp(Request $request)
     {
         $request->validate([
-            'usuario' => 'required|email'
+            'usuario' => 'required|email|max:100',
         ]);
 
         // Buscar usuario
@@ -287,10 +287,11 @@ Este mensaje fue generado automáticamente; favor de no responder directamente a
                 'required',
                 'confirmed',
                 'min:6',
+                'max:15',
                 'regex:/[a-z]/',
                 'regex:/[A-Z]/',
                 'regex:/[0-9]/',
-                'regex:/[@$!%*#?_&.\-]/'
+                'regex:/[@$!%*#?_&.\-{}/;:$%(),]/'
             ]
         ], [
             'password.required' => 'La contraseña es obligatoria',
@@ -328,7 +329,7 @@ Este mensaje fue generado automáticamente; favor de no responder directamente a
     public function register(Request $request)
     {
         $request->validate([
-            'usuario' => 'required|email',
+            'usuario' => 'required|email|max:100',
             'password' => [
                 'required',
                 'min:6',
