@@ -8,5 +8,6 @@
 @include('sections.tipos')
 @include('sections.symptom')
 @include('sections.help')
+@include('profile.profile')
 
 @endsection

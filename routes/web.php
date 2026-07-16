@@ -95,3 +95,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/configuracion', [ProfileController::class, 'updateSettings'])
         ->name('profile.settings.update');
 });
+
+//Ir al perfil de usuario
+Route::get('/profile', function () {
+    return view('profile.profile');
+})->name('profile');
