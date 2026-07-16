@@ -291,7 +291,7 @@ Este mensaje fue generado automáticamente; favor de no responder directamente a
                 'regex:/[a-z]/',
                 'regex:/[A-Z]/',
                 'regex:/[0-9]/',
-                'regex:/[@$!%*#?_&.\-{}/;:$%(),]/'
+                'regex:~[@$!%*#?_&.\-{}/;:$%(),]~'
             ]
         ], [
             'password.required' => 'La contraseña es obligatoria',
@@ -336,7 +336,7 @@ Este mensaje fue generado automáticamente; favor de no responder directamente a
                 'regex:/[a-z]/',
                 'regex:/[A-Z]/',
                 'regex:/[0-9]/',
-                'regex:/[@$!%*#?_&.\-]/'
+                'regex:~[@$!%*#?_&.\-{}/;:$%(),]~'
             ]
         ], [
             'password.required' => 'La contraseña es obligatoria',

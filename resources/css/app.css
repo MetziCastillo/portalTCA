@@ -2255,3 +2255,163 @@ background-color: #F3F4F6;
 .risk-low { background-color: #f0fdf4; border: 1px solid #dcfce7; color: #166534; }
 .risk-high { background-color: #fef2f2; border: 1px solid #fee2e2; color: #991b1b; }
 .test-flex-buttons { display: flex; gap: 15px; justify-content: center; }
+
+/* Configuracion Brayam*/
+
+.settings-page {
+  min-height: 100vh;
+  padding-top: 80px;
+  padding-bottom: 60px;
+  background-color: #f9fafb;
+  box-sizing: border-box;
+}
+
+.settings-breadcrumb {
+  width: 100%;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 11%;
+  background-color: #ffffff;
+  border-bottom: 1px solid #eef0f2;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  color: #6a7282;
+}
+
+.settings-container {
+  width: min(850px, calc(100% - 40px));
+  margin: 45px auto 0;
+}
+
+.settings-heading {
+  margin-bottom: 28px;
+}
+
+.settings-heading p {
+  margin: 5px 0 0;
+  color: #4a5565;
+  font-family: "Inter", sans-serif;
+  font-size: 15px;
+}
+
+.settings-card {
+  margin-bottom: 24px;
+  overflow: hidden;
+  background-color: #ffffff;
+  border: 1px solid #e8eaed;
+  border-radius: 16px;
+  box-shadow: 0 2px 5px rgba(16, 24, 40, 0.06);
+}
+
+.settings-card-header {
+  min-height: 62px;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 0 25px;
+  background-color: #fbfcfd;
+  border-bottom: 1px solid #edf0f2;
+}
+
+.settings-card-header h2 {
+  margin: 0;
+  color: #101828;
+  font-family: "Inter", sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.settings-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 26px;
+}
+
+.settings-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.settings-field label {
+  color: #101828;
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.settings-field input:disabled {
+  cursor: not-allowed;
+  background-color: #f5f6f7;
+  color: #6a7282;
+}
+
+.settings-security-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 24px;
+}
+
+.settings-security-item {
+  min-height: 75px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 14px 17px;
+  background-color: #f9fafb;
+  border-radius: 11px;
+  box-sizing: border-box;
+}
+
+.settings-security-information {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.settings-security-information h3 {
+  margin: 0 0 4px;
+  color: #101828;
+  font-family: "Inter", sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.settings-secondary-button:hover {
+  background-color: #f1f3f4;
+}
+
+.settings-alert {
+  margin-bottom: 20px;
+  padding: 13px 16px;
+  border-radius: 10px;
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+}
+
+.settings-alert-success {
+  border: 1px solid #bbf7d0;
+  background-color: #f0fdf4;
+  color: #166534;
+}
+
+.settings-alert-error {
+  border: 1px solid #fecaca;
+  background-color: #fef2f2;
+  color: #991b1b;
+}
+
+.settings-alert-error ul {
+  margin: 8px 0 0;
+  padding-left: 20px;
+}
+
+.settings-alert-error li {
+  list-style: disc;
+}

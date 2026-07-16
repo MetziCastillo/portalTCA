@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use Illuminate\Routing\Middleware\ThrottleRequests;
 use App\Http\Controllers\ForoController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -85,3 +86,12 @@ Route::post('/admin/create', [AdminController::class, 'createUser']);
 
 // cerrar sesion
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+// configuracion
+Route::middleware('auth')->group(function () {
+    Route::get('/configuracion', [ProfileController::class, 'settings'])
+        ->name('profile.settings');
+
+    Route::patch('/configuracion', [ProfileController::class, 'updateSettings'])
+        ->name('profile.settings.update');
+});

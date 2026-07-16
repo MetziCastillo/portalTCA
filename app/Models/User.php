@@ -19,6 +19,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'usuario',
+        'username',
         'password',
         'otp',
         'otp_expires_at',
