@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Casts\Attribute; // <-- Importante añadir esta línea
 
 class User extends Authenticatable
 {
@@ -23,7 +24,8 @@ class User extends Authenticatable
         'password',
         'otp',
         'otp_expires_at',
-        'is_verified'
+        'is_verified',
+        'avatar' // <-- Agregado por si decides añadir subida de imágenes en el futuro
     ];
 
     /**
@@ -45,4 +47,21 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    /**
+     * Obtiene la URL del avatar del usuario.
+     * Si no tiene una foto cargada, genera iniciales basadas en su nombre de 'usuario'.
+     */
+    protected function avatarUrl(): Attribute
+    {
+        return Attribute::make(
+            get: function () {
+                // Genera el avatar siempre con las iniciales basadas en el campo 'usuario'
+                $nombreParaAvatar = urlencode($this->usuario ?? $this->username ?? 'User');
+
+                // Pasamos los colores sin el '#' (79EFF7 para fondo y 183133 para texto)
+                return "https://ui-avatars.com/api/?name={$nombreParaAvatar}&background=79EFF7&color=183133";
+            }
+        );
+    }
 }
