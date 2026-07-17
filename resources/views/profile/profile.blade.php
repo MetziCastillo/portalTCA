@@ -85,15 +85,15 @@
                     <h2 class="text-xl font-bold text-gray-900 mb-6">Actividad en el Foro</h2>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div class="bg-white p-2 rounded-lg border border-gray-200">
-                            <p class="text-2xl font-bold text-[#79EFF7]">0</p>
+                            <p class="text-2xl font-bold text-[#79EFF7]">{{ $publicaciones }}</p>
                             <p class="text-sm text-gray-600 mt-1">Publicaciones</p>
                         </div>
                         <div class="bg-white p-2 rounded-lg border border-gray-200">
-                            <p class="text-2xl font-bold text-[#79EFF7]">0</p>
+                            <p class="text-2xl font-bold text-[#79EFF7]">{{ $publicaciones }}</p>
                             <p class="text-sm text-gray-600 mt-1">Comentarios</p>
                         </div>
                         <div class="bg-white p-2 rounded-lg border border-gray-200">
-                            <p class="text-2xl font-bold text-[#79EFF7]">0</p>
+                            <p class="text-2xl font-bold text-[#79EFF7]">{{ $meGustaRecibidos }}</p>
                             <p class="text-sm text-gray-600 mt-1">Me gusta recibidos</p>
                         </div>
 

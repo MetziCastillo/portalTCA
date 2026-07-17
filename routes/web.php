@@ -89,14 +89,12 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // configuracion
 Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'profile'])
+        ->name('profile');
+
     Route::get('/configuracion', [ProfileController::class, 'settings'])
         ->name('profile.settings');
 
     Route::patch('/configuracion', [ProfileController::class, 'updateSettings'])
         ->name('profile.settings.update');
 });
-
-//Ir al perfil de usuario
-Route::get('/profile', function () {
-    return view('profile.profile');
-})->name('profile');
