@@ -1,0 +1,257 @@
+/* ###############         ############### 
+   ############### nav-bar ############### 
+   ###############         ############### 
+*/
+body {
+    font-family: "Inter", system-ui, sans-serif;
+}
+
+:root {
+    --navbar-height: 72px;
+}
+
+/* ===========================================
+   NAVBAR PRINCIPAL
+=========================================== */
+.main-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--navbar-height);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 40px;
+    background: #fff;
+    box-shadow: 0 1px 4px #D8E2E2;
+    line-height: normal;
+    z-index: 3000;
+}
+
+/* ===========================================
+   LOGO
+=========================================== */
+.container_logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.logo {
+    display: inline-flex;
+    align-items: center;
+    font-family: "Hind Siliguri", sans-serif;
+    font-size: 1.25em;
+    font-weight: bold;
+    color: #273141;
+    text-decoration: none;
+}
+
+/* ===========================================
+   LINKS PRINCIPALES
+=========================================== */
+.main-navbar>ul.nav-links {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 25px;
+    margin: 0;
+    padding: 0;
+}
+
+.main-navbar li {
+    list-style: none;
+}
+
+.nav_link,
+.login,
+.help,
+.logo {
+    display: inline-flex;
+    align-items: center;
+}
+
+/* LINKS */
+.nav_link {
+    font-size: 16px;
+    font-family: "Hind Siliguri", sans-serif;
+    font-weight: 400;
+    color: #4A5565;
+    text-decoration: none;
+}
+
+.nav_link.fz {
+    font-weight: 600;
+}
+
+.nav_link:hover {
+    color: #79EFF8;
+}
+
+/* ===========================================
+   LOGIN
+=========================================== */
+.login {
+    gap: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #4A5565;
+    text-decoration: none;
+}
+
+.login:hover {
+    color: #79EFF8;
+}
+
+.login:hover svg,
+.search:hover svg {
+    stroke: #79EFF8;
+}
+
+/* ===========================================
+   AYUDA
+=========================================== */
+.help {
+    gap: 6px;
+    padding: 5px 18px;
+    background: #79EFF7;
+    color: #183133;
+    font-size: 16px;
+    border-radius: 9999px;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.help:hover {
+    background: #87C8CD;
+}
+
+/* ===========================================
+   BUSCADOR
+=========================================== */
+#navbarSearchOverlay.navbar-search-overlay {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background: white;
+}
+
+#navbarSearchOverlay.active {
+    display: flex;
+    z-index: 9999;
+}
+
+.navbar-search-container {
+    width: 62%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    border: 2px solid #FF2056;
+    border-radius: 30px;
+}
+
+.navbar-search-container input {
+    width: 100%;
+    border: none;
+    outline: none;
+}
+
+.navbar-search-close {
+    border: none;
+    background: none;
+    font-size: 28px;
+}
+
+/* ===========================================
+   HAMBURGUESA
+=========================================== */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.hamburger span {
+    width: 25px;
+    height: 3px;
+    background: #333;
+    border-radius: 3px;
+}
+
+/* ===========================================
+   MOVIL
+=========================================== */
+@media(max-width:767px) {
+    :root {
+        --navbar-height: 65px;
+    }
+
+    .main-navbar {
+        height: var(--navbar-height);
+        padding: 12px 20px;
+    }
+
+    .main-navbar>ul.nav-links li {
+        width: 100%;
+    }
+
+    /* logo pequeño */
+    .logo {
+        font-size: 1.05em;
+    }
+
+    /* boton hamburguesa */
+    .hamburger {
+        display: flex;
+    }
+
+    /* MENU LATERAL */
+
+
+    .main-navbar>ul.nav-links {
+        position: fixed;
+        top: var(--navbar-height);
+        right: 0;
+        width: 260px;
+        max-height: calc(100vh - var(--navbar-height));
+        z-index: 35000;
+        display: flex;
+        flex-direction: column;
+        /* CAMBIO IMPORTANTE */
+        align-items: flex-start;
+        padding: 25px 20px;
+        gap: 18px;
+        background: white;
+        box-shadow: -5px 0 20px rgba(0, 0, 0, .15);
+        transform: translateX(100%);
+        transition: transform .35s ease;
+        overflow-y: auto;
+    }
+
+    .main-navbar>ul.nav-links.active {
+        transform: translateX(0);
+        justify-content: flex-start;
+        margin: 0;
+    }
+}
+
+/* ===========================================
+   TABLET
+=========================================== */
+@media(min-width:768px) and (max-width:1211px) {
+    .login-text {
+        display: none;
+    }
+
+    .login {
+        padding: 8px;
+    }
+
+}

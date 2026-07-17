@@ -7,7 +7,5 @@
 @include('sections.test')
 @include('sections.tipos')
 @include('sections.symptom')
-@include('sections.help')
-@include('profile.profile')
-
+@include('sections.help')   
 @endsection

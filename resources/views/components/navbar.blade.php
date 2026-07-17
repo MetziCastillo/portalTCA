@@ -1,4 +1,4 @@
-<nav class="fixed-top">
+<nav class="main-navbar">
   <div class="container_logo">
     <a href="" class="logo">
       <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#8DF1F8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart-icon lucide-heart">
@@ -7,15 +7,12 @@
       Portal de la Información sobre el TCA
     </a>
   </div>
-
-  <!-- Botón hamburguesa responsive -->
-  <div class="hamburger">
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
-
-
+    <!-- Botón hamburguesa responsive -->
+    <div class="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
   <ul class="nav-links">
     <li><a href="{{ request()->is('/') ? '#Inicio' : route('home') }}" class="nav_link">Inicio</a></li>
     <li><a href="{{ request()->is('/') ? '#Sobre-TCA' : route('home') . '#Sobre-TCA' }}" class="nav_link">Sobre TCA</a></li>
@@ -37,29 +34,31 @@
     <!-- SOLO VALIDO USUARIO NORMAL -->
     @auth
     <!-- VISTA PC -->
-    <li class="hidden md:block">
+    <li class="hidden md:flex">
       <div class="relative">
         <button
           id="openOpcions"
           type="button"
-          class="flex border-none items-center gap-2 !bg-white hover:!bg-gray-100 px-3 py-1.5 rounded-full">
+          class="flex border-none items-center gap-2 bg-white hover:bg-gray-100 px-3 py-1.5 rounded-full">
 
-          <div class="w-5 h-5 rounded-full bg-red-700 overflow-hidden">
+          <div class="w-8 h-8 rounded-full border overflow-hidden border-[#79EFF7] group-hover:border-[#87C8CD] transition-colors">
             <img src="{{ auth()->user()->avatar_url ?? '' }}" alt="Imagen del usuario" class="w-full h-full object-cover">
           </div>
 
-          {{ auth()->user()->username ?: auth()->user()->usuario }}
+          <span class="hidden lg:inline font-medium">{{ auth()->user()->username ?: auth()->user()->usuario }}</span>
 
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#364153" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="m6 9 6 6 6-6" />
           </svg>
         </button>
 
-        <div id="userOptions" class="hidden absolute top-full right-0 mt-2 z-100 bg-white border rounded-lg shadow-lg w-64 overflow-hidden">
+        <div id="userOptions"
+          class="hidden absolute top-full right-0 mt-2 z-50 bg-white border border-gray-200 rounded-lg shadow-lg w-64 overflow-hidden">
           <div class="px-4 py-2 border-b border-gray-400">
-            <p class="text-sm font-semibold text-gray-800">{{ auth()->user()->username ?: auth()->user()->usuario }}</p>
+            <p class="text-base font-semibold text-gray-900 mb-0">{{ auth()->user()->username ?: auth()->user()->usuario }}</p>
+            <p class="text-sm text-gray-500 truncate mb-2">{{ auth()->user()->usuario }}</p>
           </div>
-          <a href="{{ route('profile') }}" class="flex items-center gap-3 px-4 py-2 text-sm !text-gray-700 hover:!bg-gray-100 !no-underline">
+          <a href="{{ route('profile') }}" class="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 no-underline">
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#364153" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-user-round">
               <path d="M17.925 20.056a6 6 0 0 0-11.851.001" />
               <circle cx="12" cy="11" r="4" />
@@ -68,7 +67,7 @@
             <span>Mi perfil</span>
           </a>
 
-          <a href="{{ route('profile.settings') }}" class="flex items-center gap-3 px-4 py-2 text-sm !text-gray-700 hover:!bg-gray-100 !no-underline">
+          <a href="{{ route('profile.settings') }}" class="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 no-underline">
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#364153" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-settings">
               <path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915" />
               <circle cx="12" cy="12" r="3" />
@@ -76,16 +75,20 @@
             <span>Configuración</span>
           </a>
 
-          <form action="/logout" method="POST">
-            @csrf
-            <button type="submit" class="w-full flex items-center gap-2 px-4 py-2 text-sm text-red-600 hover:bg-gray-100 text-left">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#E7000B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M21 12H9" />
-                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
-              </svg>
-              Cerrar sesión
-            </button>
-          </form>
+          <div class="border-t border-gray-100 mt-1 pt-1">
+            <form action="/logout" method="POST">
+              @csrf
+              <!-- Añadido rounded-b-lg al final -->
+              <button type="submit" class="w-full flex items-center gap-3 px-4 py-2 text-sm text-red-600 bg-transparent hover:bg-red-50 transition-colors text-left border-none outline-none rounded-b-lg">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4">
+                  <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                  <polyline points="16 17 21 12 16 7" />
+                  <line x1="21" x2="9" y1="12" y2="12" />
+                </svg>
+                Cerrar Sesión
+              </button>
+            </form>
+          </div>
         </div>
       </div>
     </li>
@@ -93,40 +96,58 @@
 
     @auth
     <!-- VISTA MOVIL -->
-    <div class="block md:hidden border-t border-gray-100 mt-4 pt-4 w-full text-center">
-      <p class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Mi Cuenta</p>
-      <p class="text-sm font-semibold text-gray-700 mb-3">{{ auth()->user()->username ?: auth()->user()->usuario }}</p>
+    <li class="md:hidden">
+      <div class="border-t border-gray-100 mt-4 pt-4 w-full">
 
-      <div class="flex flex-col gap-2 items-center">
-        <a href="{{ route('profile') }}" class="text-gray-600 hover:text-gray-900 py-1 text-sm">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#364153" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-cog-icon lucide-cog">
-            <path d="M11 10.27 7 3.34" />
-            <path d="m11 13.73-4 6.93" />
-            <path d="M12 22v-2" />
-            <path d="M12 2v2" />
-            <path d="M14 12h8" />
-            <path d="m17 20.66-1-1.73" />
-            <path d="m17 3.34-1 1.73" />
-            <path d="M2 12h2" />
-            <path d="m20.66 17-1.73-1" />
-            <path d="m20.66 7-1.73 1" />
-            <path d="m3.34 17 1.73-1" />
-            <path d="m3.34 7 1.73 1" />
-            <circle cx="12" cy="12" r="2" />
-            <circle cx="12" cy="12" r="8" />
-          </svg>
-          Mi perfil
-        </a>
-        <a href="{{ route('profile.settings') }}" class="text-gray-600 hover:text-gray-900 py-1 text-sm">Configuración</a>
+        <div class="flex items-start gap-3  mb-4">
+          <div class="w-10 h-10 rounded-full border-2 overflow-hidden border-[#79EFF7] flex-shrink-0">
+            <img src="{{ auth()->user()->avatar_url }}" alt="Imagen del usuario" class="w-full h-full object-cover">
+          </div>
+          <div class="text-left truncate">
+            <p class="font-semibold text-gray-900 text-sm leading-none mb-1">
+              {{ auth()->user()->username ?: auth()->user()->usuario }}
+            </p>
+            <p class="text-xs text-gray-500 truncate m-0">
+              {{ auth()->user()->usuario }}
+            </p>
+          </div>
+        </div>
 
-        <form action="/logout" method="POST" class="w-full mt-2">
-          @csrf
-          <button type="submit" class="mx-auto flex items-center justify-center gap-2 text-red-600 font-medium text-sm bg-red-50 hover:bg-red-100 px-4 py-2 rounded-full w-3/4">
-            Cerrar sesión
-          </button>
-        </form>
+        <div class="flex flex-col gap-1 px-2">
+
+          <a href="{{ route('profile') }}" class="flex items-center gap-3 px-4 py-2.5 rounded-xl text-gray-700 hover:bg-gray-50 transition-colors text-sm no-underline font-medium">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#617678" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-user-round">
+              <path d="M17.925 20.056a6 6 0 0 0-11.851.001" />
+              <circle cx="12" cy="11" r="4" />
+              <circle cx="12" cy="12" r="10" />
+            </svg>
+            <span>Mi perfil</span>
+          </a>
+
+          <a href="{{ route('profile.settings') }}" class="flex items-center gap-3 px-4 py-2.5 rounded-xl text-gray-700 hover:bg-gray-50 transition-colors text-sm no-underline font-medium">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#617678" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-settings">
+              <path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915" />
+              <circle cx="12" cy="12" r="3" />
+            </svg>
+            <span>Configuración</span>
+          </a>
+
+          <!-- Formulario Cerrar Sesión -->
+          <div class="border-t border-gray-100 mt-1 pt-1">
+            <form action="/logout" method="POST" class="w-full mt-2">
+              @csrf
+              <button type="submit" class="w-full flex items-center gap-3 px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors text-left">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E7000B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 12H9" />
+                  <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                </svg>
+                Cerrar sesión
+              </button>
+            </form>
+          </div>
+        </div>
       </div>
-    </div>
+    </li>
     @endauth
     <li>
       @guest
@@ -164,8 +185,8 @@
   <div id="navbarSearchOverlay" class="navbar-search-overlay" style="display: none;">
     <div class="navbar-search-container">
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#99A1AF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="m21 21-4.34-4.34"/>
-        <circle cx="11" cy="11" r="8"/>
+        <path d="m21 21-4.34-4.34" />
+        <circle cx="11" cy="11" r="8" />
       </svg>
 
       <input type="text" id="globalSearch" placeholder="Buscar información, síntomas, recursos...">
