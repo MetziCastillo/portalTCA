@@ -188,7 +188,10 @@ body {
 /* ===========================================
    MOVIL
 =========================================== */
-@media(max-width:767px) {
+/* ===========================================
+   MOVIL Y TABLET MEDIANA (Menú Hamburguesa Activo)
+=========================================== */
+@media(max-width: 1050px) {
     :root {
         --navbar-height: 65px;
     }
@@ -207,14 +210,12 @@ body {
         font-size: 1.05em;
     }
 
-    /* boton hamburguesa */
+    /* boton hamburguesa se muestra */
     .hamburger {
         display: flex;
     }
 
-    /* MENU LATERAL */
-
-
+    /* MENU LATERAL DESPLEGABLE */
     .main-navbar>ul.nav-links {
         position: fixed;
         top: var(--navbar-height);
@@ -224,7 +225,6 @@ body {
         z-index: 35000;
         display: flex;
         flex-direction: column;
-        /* CAMBIO IMPORTANTE */
         align-items: flex-start;
         padding: 25px 20px;
         gap: 18px;
@@ -243,9 +243,9 @@ body {
 }
 
 /* ===========================================
-   TABLET
+   TABLET GRANDE (Menú de escritorio pero compacto)
 =========================================== */
-@media(min-width:768px) and (max-width:1211px) {
+@media(min-width: 1051px) and (max-width: 1211px) {
     .login-text {
         display: none;
     }
@@ -253,5 +253,9 @@ body {
     .login {
         padding: 8px;
     }
-
+    
+    .login svg {
+        width: 16px;
+        height: 16px;
+    }
 }
