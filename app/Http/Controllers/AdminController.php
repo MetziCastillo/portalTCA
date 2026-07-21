@@ -32,7 +32,8 @@ class AdminController extends Controller
             $query->where(function ($q) use ($buscar) {
 
                 $q->where('id', 'like', "%$buscar%")
-                ->orWhere('usuario', 'like', "%$buscar%");
+                ->orWhere('usuario', 'like', "%$buscar%")
+                ->orWhere('username', 'like', "%$buscar%");
 
                 if (strtolower($buscar) == 'admin') {
                     $q->orWhere('tipo_usuario', 1);
@@ -68,11 +69,19 @@ class AdminController extends Controller
         $user = User::findOrFail($id);
 
         $request->validate([
-            'usuario' => 'required|email|unique:users,usuario,' . $id,
+    'usuario' => 'required|email|unique:users,usuario,' . $id,
+            'username' => 'nullable|string|max:50|unique:users,username,' . $id,
         ]);
+
+        $user->usuario = $request->usuario;
+
+        $user->username = $request->filled('username')
+            ? trim($request->username)
+            : null;
+
         $user->tipo_usuario = $request->tipo_usuario;
 
-        if ($request->password) {
+        if ($request->filled('password')) {
             $user->password = bcrypt($request->password);
         }
 
@@ -114,6 +123,7 @@ class AdminController extends Controller
     {
         $request->validate([
             'usuario' => 'required|email|unique:users,usuario|max:100',
+            'username' => 'nullable|string|max:50|unique:users,username',
             'password' => 'required|min:6',
             'tipo_usuario' => 'required',
             'activo' => 'required'
@@ -121,6 +131,11 @@ class AdminController extends Controller
 
         User::create([
             'usuario' => $request->usuario,
+
+            'username' => $request->filled('username')
+                ? trim($request->username)
+                : null,
+
             'password' => Hash::make($request->password),
             'tipo_usuario' => $request->tipo_usuario,
             'activo' => $request->activo,

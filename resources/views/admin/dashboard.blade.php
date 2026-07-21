@@ -1,180 +1,141 @@
 @extends('layouts.app')
 
-<head>
-    <title>Administrador</title>
-    <style>
-        body{
-            font-family:Arial;
-            padding:30px;
-        }
+@section('title', 'Administrador')
+@section('content')
+<div class="admin-page">
+    <h1 class="admin-title">Panel Administrador</h1>
 
-        table{
-            width:100%;
-            border-collapse:collapse;
-        }
+    <form method="GET" action="/admin" class="admin-search-form">
+        <input class="admin-input admin-search-input" type="text" name="buscar" value="{{ request('buscar') }}" placeholder="Buscar usuario">
+        <button class="admin-btn admin-btn-primary" type="submit">Buscar</button>
 
-        th,td{
-            border:1px solid #ddd;
-            padding:10px;
-            text-align:center;
-        }
-
-        button{
-            padding:6px 12px;
-            margin:2px;
-            cursor:pointer;
-        }
-
-        input,select{
-            padding:5px;
-            width:90%;
-        }
-
-        .edit-row{
-            display:none;
-            background:#f8f8f8;
-        }
-    </style>
-</head>
-
-<body>
-    <br><br><br><br><br>
-    <h1>Panel Administrador</h1>
-
-    <form method="GET" action="/admin">
-        <input type="text" name="buscar" value="{{ request('buscar') }}" placeholder="Buscar usuario">
-        <button type="submit">Buscar</button>
-
-        <a href="/admin">
-            <button type="button">Limpiar</button>
-        </a>
+        <a href="/admin" class="admin-link-button admin-btn admin-btn-secondary">Limpiar</a>
     </form>
 
-    <button onclick="crearUsuario()">Create User</button>
-    <br><br>
+    <button class="admin-btn admin-btn-primary admin-create-button" type="button" onclick="crearUsuario()">Create User</button>
 
-    <table>
-        <tr>
-            <th>ID</th>
-            <th>Usuario</th>
-            <th>Password</th>
-            <th>Tipo</th>
-            <th>Estado</th>
-            <th>Acciones</th>
-        </tr>
+    <div class="admin-table-container">
+        <table class="admin-table">
+            <tr>
+                <th>ID</th>
+                <th>Correo</th>
+                <th>Username</th>
+                <th>Password</th>
+                <th>Tipo</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
 
-        <tr id="createRow" style="display:none;">
-            <td colspan="6">
-                <form method="POST" action="/admin/create" style="display:flex; gap:10px; align-items:center;">
-                    @csrf
+            <tr id="createRow" class="admin-create-row" style="display:none;">
+                <td colspan="7">
+                    <form method="POST" action="/admin/create" class="admin-inline-form">
+                        @csrf
 
-                    <span>Nuevo</span>
+                        <span>Nuevo</span>
 
-                    <input type="email" name="usuario" placeholder="Correo" required>
+                        <input class="admin-input" type="email" name="usuario" placeholder="Correo" required>
+                        <input class="admin-input" type="text" name="username" placeholder="Username opcional">
+                        <input class="admin-input" type="text" name="password" placeholder="Password" required>
 
-                    <input type="text" name="password" placeholder="Password" required>
+                        <select class="admin-select" name="tipo_usuario">
+                            <option value="1">Admin</option>
+                            <option value="2" selected>Basico</option>
+                        </select>
 
-                    <select name="tipo_usuario">
-                        <option value="1">Admin</option>
-                        <option value="2" selected>Basico</option>
-                    </select>
+                        <select class="admin-select" name="activo">
+                            <option value="1" selected>Activo</option>
+                            <option value="0">Desactivado</option>
+                        </select>
 
-                    <select name="activo">
-                        <option value="1" selected>Activo</option>
-                        <option value="0">Desactivado</option>
-                    </select>
+                        <button class="admin-btn admin-btn-primary" type="submit">Guardar</button>
+                        <button class="admin-btn admin-btn-secondary" type="button" onclick="cancelarCrear()">Cancel</button>
+                    </form>
+                </td>
+            </tr>
 
-                    <button type="submit">Guardar</button>
-                    <button type="button" onclick="cancelarCrear()">Cancel</button>
-                </form>
-            </td>
-        </tr>
-
-        @foreach($usuarios as $u)
-        <tr id="view{{ $u->id }}" class="fila-usuario">
-            <td>{{ $u->id }}</td>
-            <td>{{ $u->usuario }}</td>
-            <td>{{ $u->password }}</td>
-            <td>{{ $u->tipo_usuario == 1 ? 'Admin' : 'Basico' }}</td>
-            <td>
-                @if($u->activo == 1)
-                    Activo
-                @else
-                    Desactivado
-                @endif
-            </td>
-
-            <td>
-                <button onclick="editar({{ $u->id }})">Edit</button>
-
-                <form method="POST" action="/admin/delete/{{ $u->id }}" style="display:inline;">
-                @csrf
-                <button type="submit">Delete</button>
-                </form>
-
-                <a href="/admin/user/{{ $u->id }}">
-                <button type="button">View</button>
-                </a>
-            </td>
-        </tr>
-
-        <tr id="edit{{ $u->id }}" class="edit-row">
-            <form method="POST" action="/admin/update/{{ $u->id }}">
-                @csrf
-
+            @foreach($usuarios as $u)
+            <tr id="view{{ $u->id }}" class="fila-usuario">
                 <td>{{ $u->id }}</td>
-                <td>
-                    <input type="text" name="usuario" value="{{ $u->usuario }}">
-                </td>
-                <td>
-                    <input type="text" name="password" value="{{ $u->password }}">
-                </td>
-                <td>
-                    <select name="tipo_usuario">
-                        <option value="1" {{ $u->tipo_usuario==1?'selected':'' }}>Admin</option>
-                        <option value="2" {{ $u->tipo_usuario==2?'selected':'' }}>Basico</option>
-                    </select>
-                </td>
+                <td>{{ $u->usuario }}</td>
+                <td>{{ !empty($u->username) ? $u->username : 'None' }}</td>
+                <td class="admin-password-cell">{{ $u->password }}</td>
+                <td>{{ $u->tipo_usuario == 1 ? 'Admin' : 'Basico' }}</td>
                 <td>
                     @if($u->activo == 1)
-                    <span style="color:green;font-weight:bold;">Activo</span>
+                        <span class="admin-status admin-status-active">Activo</span>
                     @else
-                    <span style="color:red;font-weight:bold;">Desactivado</span>
+                        <span class="admin-status admin-status-disabled">Desactivado</span>
                     @endif
                 </td>
 
-                <td>
-                    <button type="submit">Save</button>
-                    <button type="button" onclick="cancelar({{ $u->id }})">Cancel</button>
-                </td>
-            </form>
-        </tr>
-        @endforeach
-    </table>
+                <td class="admin-actions">
+                    <button class="admin-btn admin-btn-secondary" type="button" onclick="editar({{ $u->id }})">Edit</button>
 
-    <div style="margin-top:20px; text-align:center;">
+                    <form method="POST" action="/admin/delete/{{ $u->id }}" class="admin-action-form">
+                        @csrf
+                        <button class="admin-btn admin-btn-danger" type="submit">Delete</button>
+                    </form>
+
+                    <a href="/admin/user/{{ $u->id }}" class="admin-link-button admin-btn admin-btn-view">View</a>
+                </td>
+            </tr>
+
+            <tr id="edit{{ $u->id }}" class="edit-row">
+                <form method="POST" action="/admin/update/{{ $u->id }}">
+                    @csrf
+
+                    <td>{{ $u->id }}</td>
+                    <td>
+                        <input class="admin-input" type="text" name="usuario" value="{{ $u->usuario }}">
+                    </td>
+                    <td>
+                        <input class="admin-input" type="text" name="username" value="{{ $u->username }}" placeholder="None">
+                    </td>
+                    <td>
+                        <input class="admin-input" type="text" name="password" placeholder="Nueva contraseña">
+                    </td>
+                    <td>
+                        <select class="admin-select" name="tipo_usuario">
+                            <option value="1" {{ $u->tipo_usuario==1?'selected':'' }}>Admin</option>
+                            <option value="2" {{ $u->tipo_usuario==2?'selected':'' }}>Basico</option>
+                        </select>
+                    </td>
+                    <td>
+                        @if($u->activo == 1)
+                            <span class="admin-status admin-status-active">Activo</span>
+                        @else
+                            <span class="admin-status admin-status-disabled">Desactivado</span>
+                        @endif
+                    </td>
+
+                    <td class="admin-actions">
+                        <button class="admin-btn admin-btn-primary" type="submit">Save</button>
+                        <button class="admin-btn admin-btn-secondary" type="button" onclick="cancelar({{ $u->id }})">Cancel</button>
+                    </td>
+                </form>
+            </tr>
+            @endforeach
+        </table>
+    </div>
+
+    <div class="admin-pagination">
         @php
             $buscar = request('buscar');
         @endphp
 
         @if ($usuarios->onFirstPage())
-            <button disabled>Anterior</button>
+            <button class="admin-btn admin-btn-secondary" disabled>Anterior</button>
         @else
-            <a href="{{ url('/admin?page=' . ($usuarios->currentPage() - 1) . '&buscar=' . urlencode($buscar)) }}">
-                <button>Anterior</button>
-            </a>
+            <a class="admin-link-button admin-btn admin-btn-secondary" href="{{ url('/admin?page=' . ($usuarios->currentPage() - 1) . '&buscar=' . urlencode($buscar)) }}">Anterior</a>
         @endif
 
-        <span style="margin:0 15px;">
-            Página {{ $usuarios->currentPage() }} de {{ $usuarios->lastPage() }}
-        </span>
+        <span>Página {{ $usuarios->currentPage() }} de {{ $usuarios->lastPage() }}</span>
 
         @if ($usuarios->hasMorePages())
-            <a href="{{ url('/admin?page=' . ($usuarios->currentPage() + 1) . '&buscar=' . urlencode($buscar)) }}">
-                <button>Siguiente</button>
-            </a>
+            <a class="admin-link-button admin-btn admin-btn-secondary" href="{{ url('/admin?page=' . ($usuarios->currentPage() + 1) . '&buscar=' . urlencode($buscar)) }}">Siguiente</a>
         @else
-            <button disabled>Siguiente</button>
+            <button class="admin-btn admin-btn-secondary" disabled>Siguiente</button>
         @endif
     </div>
-</body>
+</div>
+@endsection

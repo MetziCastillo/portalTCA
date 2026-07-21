@@ -133,7 +133,7 @@
 
                         <div class="uht">
                             <p class="txt-card-user usn">
-                                {{ '@' . ($tema->user->usuario ?? 'Usuario') }}
+                                {{ '@' . ($tema->user->username ?: $tema->user->usuario) }}
                             </p>
 
                             <p class="txt-card-user hr">
@@ -202,7 +202,13 @@
                     @if(isset($tema->comentarios))
                         @foreach($tema->comentarios as $comentario)
                             <p>
-                                <strong>{{ $comentario->usuario->usuario }}</strong>:
+                                <strong>
+                                    @if($comentario->usuario)
+                                        {{ $comentario->usuario->username ?: $comentario->usuario->usuario }}
+                                    @else
+                                        Usuario
+                                    @endif
+                                </strong>:
                                 {{ $comentario->comentario }}
                             </p>
                         @endforeach
