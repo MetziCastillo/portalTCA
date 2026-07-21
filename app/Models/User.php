@@ -57,11 +57,27 @@ class User extends Authenticatable
     {
         return Attribute::make(
             get: function () {
-                // Genera el avatar siempre con las iniciales basadas en el campo 'usuario'
-                $nombreParaAvatar = urlencode($this->usuario ?? $this->username ?? 'User');
 
-                // Pasamos los colores sin el '#' (79EFF7 para fondo y 183133 para texto)
-                return "https://ui-avatars.com/api/?name={$nombreParaAvatar}&background=79EFF7&color=183133";
+                $nombreParaAvatar = urlencode(
+                    $this->usuario ?? $this->username ?? 'User'
+                );
+
+                $colores = [
+                    ['background' => '79EFF7', 'color' => '183133'],
+                    ['background' => 'B8F2E6', 'color' => '183133'],
+                    ['background' => 'F7D6E0', 'color' => '183133'],
+                    ['background' => 'D9C2F0', 'color' => '183133'],
+                    ['background' => 'FFE5B4', 'color' => '183133'],
+                    ['background' => 'C7CEEA', 'color' => '183133'],
+                ];
+
+                $indice = $this->id % count($colores);
+                $color = $colores[$indice];
+
+                return "https://ui-avatars.com/api/?" .
+                    "name={$nombreParaAvatar}" .
+                    "&background={$color['background']}" .
+                    "&color={$color['color']}";
             }
         );
     }

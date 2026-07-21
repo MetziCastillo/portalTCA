@@ -9,7 +9,7 @@
         <a href="{{ route('home') }}">Inicio</a>
         <span>></span>
         <span class="txtforobc">Mi perfil</span>
-</div>
+    </div>
 
     <!-- Contenedor del perfil -->
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">

@@ -2,9 +2,7 @@
    ############### nav-bar ############### 
    ###############         ############### 
 */
-body {
-    font-family: "Inter", system-ui, sans-serif;
-}
+
 
 :root {
     --navbar-height: 72px;
@@ -168,6 +166,20 @@ body {
     font-size: 28px;
 }
 
+.desktop-only {
+    display: flex !important;
+}
+
+/* La vista móvil nace completamente oculta */
+.mobile-only {
+    display: none !important;
+}
+
+/* El texto del botón PC se muestra en pantallas grandes por defecto */
+.hide-text-custom {
+    display: inline !important;
+}
+
 /* ===========================================
    HAMBURGUESA
 =========================================== */
@@ -240,6 +252,21 @@ body {
         justify-content: flex-start;
         margin: 0;
     }
+
+    .desktop-only {
+        display: none !important;
+    }
+
+    .mobile-only {
+        display: block !important;
+        /* O 'flex' dependiendo de tu estructura de menú */
+    }
+
+    /* Opcional: Forzar que el texto del botón PC se oculte si se llega a colar */
+    .hide-text-custom {
+        display: none !important;
+    }
+
 }
 
 /* ===========================================
@@ -253,7 +280,7 @@ body {
     .login {
         padding: 8px;
     }
-    
+
     .login svg {
         width: 16px;
         height: 16px;

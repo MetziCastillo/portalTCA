@@ -7,12 +7,12 @@
       Portal de la Información sobre el TCA
     </a>
   </div>
-    <!-- Botón hamburguesa responsive -->
-    <div class="hamburger">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
+  <!-- Botón hamburguesa responsive -->
+  <div class="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
   <ul class="nav-links">
     <li><a href="{{ request()->is('/') ? '#Inicio' : route('home') }}" class="nav_link">Inicio</a></li>
     <li><a href="{{ request()->is('/') ? '#Sobre-TCA' : route('home') . '#Sobre-TCA' }}" class="nav_link">Sobre TCA</a></li>
@@ -34,18 +34,20 @@
     <!-- SOLO VALIDO USUARIO NORMAL -->
     @auth
     <!-- VISTA PC -->
-    <li class="hidden md:flex">
+    <!-- Se cambió 'hidden md:flex' por 'desktop-only' -->
+    <li class="desktop-only">
       <div class="relative">
         <button
           id="openOpcions"
           type="button"
           class="flex border-none items-center gap-2 bg-white hover:bg-gray-100 px-3 py-1.5 rounded-full">
 
-          <div class="w-8 h-8 rounded-full border overflow-hidden border-[#79EFF7] group-hover:border-[#87C8CD] transition-colors">
+          <div class="w-8 h-8 rounded-full border overflow-hidden border-transparent group-hover:border-[#87C8CD] transition-colors">
             <img src="{{ auth()->user()->avatar_url ?? '' }}" alt="Imagen del usuario" class="w-full h-full object-cover">
           </div>
 
-          <span class="hidden lg:inline font-medium">{{ auth()->user()->username ?: auth()->user()->usuario }}</span>
+          <!-- Se cambió 'hidden lg:inline' por 'hide-text-custom' para que se adapte a tus 1050px -->
+          <span class="hide-text-custom font-medium">{{ auth()->user()->username ?: auth()->user()->usuario }}</span>
 
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#364153" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="m6 9 6 6 6-6" />
@@ -78,7 +80,6 @@
           <div class="border-t border-gray-100 mt-1 pt-1">
             <form action="/logout" method="POST">
               @csrf
-              <!-- Añadido rounded-b-lg al final -->
               <button type="submit" class="w-full flex items-center gap-3 px-4 py-2 text-sm text-red-600 bg-transparent hover:bg-red-50 transition-colors text-left border-none outline-none rounded-b-lg">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4">
                   <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
@@ -96,11 +97,12 @@
 
     @auth
     <!-- VISTA MOVIL -->
-    <li class="md:hidden">
+    <!-- Se cambió 'md:hidden' por 'mobile-only' -->
+    <li class="mobile-only">
       <div class="border-t border-gray-100 mt-4 pt-4 w-full">
 
         <div class="flex items-start gap-3  mb-4">
-          <div class="w-10 h-10 rounded-full border-2 overflow-hidden border-[#79EFF7] flex-shrink-0">
+          <div class="w-8 h-8 rounded-full border overflow-hidden border-transparent group-hover:border-[#87C8CD] transition-colors">
             <img src="{{ auth()->user()->avatar_url }}" alt="Imagen del usuario" class="w-full h-full object-cover">
           </div>
           <div class="text-left truncate">
@@ -149,6 +151,8 @@
       </div>
     </li>
     @endauth
+
+
     <li>
       @guest
       <a class="login" href="{{ route('login') }}">

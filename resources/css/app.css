@@ -4,6 +4,12 @@
 @import "./navbar.css";
 
 
+body {
+  font-family: "Inter", system-ui, sans-serif;
+  margin: 0px;
+  padding: 0px;
+}
+
 /* ###############        ############### 
    ############### FOOTER ############### 
    ###############        ############### 
@@ -1270,7 +1276,18 @@ a.button-cc {
   padding-top: 85px;
   background-color: #F9FAFB;
 }
+/* botones de like */
+.like-btn * {
+  pointer-events: none;
+}
+.like-btn.liked .lucide-heart {
+    fill: #FF2056;      
+    stroke: #FF2056;   
+}
 
+.like-btn * {
+    pointer-events: none;
+}
 /* Contenedores */
 .ctnerforo {
   display: flex;
@@ -2445,6 +2462,19 @@ a.button-cc {
 .settings-alert-error li {
   list-style: disc;
 }
+/* botones de like */
+.like-btn * {
+  pointer-events: none;
+}
+.like-btn.liked .lucide-heart {
+    fill: #FF2056;      
+    stroke: #FF2056;   
+}
+
+.like-btn * {
+    pointer-events: none;
+}
+
 
 /* Administrador */
 
