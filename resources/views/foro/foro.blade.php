@@ -5,12 +5,12 @@
 
 
 
-<div class="foroctner">
-    <nav class="breadcrumbs">
+<div class="foroctner relative">
+    <div class="breadcrumbs w-full bg-white z-10 px-4 py-2 min-[901px]:absolute min-[901px]:-top-5 min-[901px]:left-0 max-[900px]:static">
         <a href="{{ route('home') }}">Inicio</a>
         <span>></span>
         <span class="txtforobc">Foro de Apoyo</span>
-    </nav>
+    </div>
     <div class="texto-forocnter">
         <h1 class="title">Comunidad y Foro</h1>
         <p class="txtsubtitles">
@@ -60,10 +60,10 @@
 
                                         <div
                                             style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 10px;">
-                                           <button type="button" class="btn-cancelar" id="btnCancelar">Cancelar</button>
+                                            <button type="button" class="btn-cancelar" id="btnCancelar">Cancelar</button>
                                             <button type="submit">Publicar Tema</button>
                                         </div>
-                                        </form>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -113,20 +113,24 @@
             @foreach($temas as $tema)
             @php
             $categorias = [
-                1 => 'recuperacion',
-                2 => 'familiares',
-                3 => 'consejos',
-                4 => 'positivismo'
+            1 => 'recuperacion',
+            2 => 'familiares',
+            3 => 'consejos',
+            4 => 'positivismo'
             ];
             @endphp
 
-            <div class="cardcomment"
+            <div class="cardcomment mt-6"
                 data-category="{{ $categorias[$tema->categoria] ?? 'otros' }}"
                 data-user="{{ $tema->id_usuario }}"
                 data-title="{{ strtolower($tema->titulo) }}"
                 data-message="{{ strtolower($tema->mensaje) }}">
                 <div class="ctnertop">
-                    <div class="cc1"></div>
+                    <div class="cc1 w-10">
+                        <div class="w-10 h-10 rounded-full border overflow-hidden border-none items-center justify-items-center">
+                            <img src="{{ $tema->user->avatar_url ?? '' }}" alt="Imagen del usuario" class="w-full h-full object-cover">
+                        </div>
+                    </div>
 
                     <div class="cc2">
                         <h2 class="txt-card-title">{{ $tema->titulo }}</h2>
@@ -140,14 +144,14 @@
                                 {{ $tema->created_at->diffForHumans() }}
                             </p>
 
-                            <p class="txt-card-user">.</p>
+                            <p class=" text-[#6A7282] text-3xl">·</p>
 
                             @php
                             $categoriasNombre = [
-                                1 => 'Recuperación',
-                                2 => 'Familiares',
-                                3 => 'Consejos',
-                                4 => 'Positivismo'
+                            1 => 'Recuperación',
+                            2 => 'Familiares',
+                            3 => 'Consejos',
+                            4 => 'Positivismo'
                             ];
                             @endphp
 
@@ -158,37 +162,40 @@
                     </div>
                 </div>
 
-                <p class="txt-card-cont">{{ $tema->mensaje }}</p>
+                <p class="txt-card-cont font-normal my-6 ">{{ $tema->mensaje }}</p>
 
-                <hr>
+                <hr class="border-gray-200 border-t-1">
 
-                <div class="card-btm">
-                    <div class="card-btm1 cb1 like-btn" data-id="{{ $tema->id_foro }}" style="cursor:pointer;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                <div class="card-btm mt-4">
+                    <div class="card-btm1 cb1 like-btn {{ auth()->check() && $tema->likes->contains('id_usuario', auth()->id()) ? 'liked' : '' }}" data-id="{{ $tema->id_foro }}" style="cursor:pointer;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
                             viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2"
                             stroke-linecap="round" stroke-linejoin="round"
                             class="lucide lucide-heart icons-foro">
-                            <path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"/>
+                            <path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5" />
                         </svg>
 
-                        <p class="txt-card-mini nber" id="likes-{{ $tema->id_foro }}">
+                        <p class="txt-card-mini nber ml-2" id="likes-{{ $tema->id_foro }}">
                             {{ $tema->likes->count() }}
                         </p>
                     </div>
 
-                    <div class="card-btm1 cb2">
-                        <p class="txt-card-mini cms toggle-comments" data-id="{{ $tema->id_foro }}" style="cursor:pointer;">
+                    <div class="card-btm1 cb2 ml-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-square-icon lucide-message-square icons-foro">
+                            <path d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z" />
+                        </svg>
+                        <p class="txt-card-mini cms toggle-comments ml-2" data-id="{{ $tema->id_foro }}" style="cursor:pointer;">
                             {{ isset($tema->comentarios) ? count($tema->comentarios) : 0 }} comentarios
                         </p>
                     </div>
 
                     @auth
-                        @if(auth()->user()->tipo_usuario == 1 || auth()->user()->id == $tema->id_usuario)
-                            <button class="delete-btn" data-id="{{ $tema->id_foro }}">
-                                Eliminar
-                            </button>
-                        @endif
+                    @if(auth()->user()->tipo_usuario == 1 || auth()->user()->id == $tema->id_usuario)
+                    <button class="delete-btn" data-id="{{ $tema->id_foro }}">
+                        Eliminar
+                    </button>
+                    @endif
                     @endauth
                 </div>
 
@@ -200,21 +207,21 @@
                     </form>
 
                     @if(isset($tema->comentarios))
-                        @foreach($tema->comentarios as $comentario)
-                            <p>
-                                <strong>
-                                    @if($comentario->usuario)
-                                        {{ $comentario->usuario->username ?: $comentario->usuario->usuario }}
-                                    @else
-                                        Usuario
-                                    @endif
-                                </strong>:
-                                {{ $comentario->comentario }}
-                            </p>
-                        @endforeach
+                    @foreach($tema->comentarios as $comentario)
+                    <p>
+                        <strong>
+                            @if($comentario->usuario)
+                            {{ $comentario->usuario->username ?: $comentario->usuario->usuario }}
+                            @else
+                            Usuario
+                            @endif
+                        </strong>:
+                        {{ $comentario->comentario }}
+                    </p>
+                    @endforeach
                     @endif
                 </div>
             </div>
-            @endforeach 
+            @endforeach
         </div>
     </div>
