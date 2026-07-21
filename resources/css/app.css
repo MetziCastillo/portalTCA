@@ -2445,3 +2445,252 @@ a.button-cc {
 .settings-alert-error li {
   list-style: disc;
 }
+
+/* Administrador */
+
+.admin-page {
+  min-height: 70vh;
+  padding: 120px 30px 50px;
+  background-color: #F9FAFB;
+  font-family: "Inter", sans-serif;
+}
+
+.admin-title {
+  margin: 0 0 20px;
+  color: #101828;
+  font-family: "Noto Sans Bengali", sans-serif;
+  font-size: 2em;
+  font-weight: 700;
+}
+
+.admin-search-form {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.admin-search-input {
+  max-width: 420px;
+}
+
+.admin-input,
+.admin-select {
+  width: 100%;
+  padding: 9px 10px;
+  border: 1px solid #D1D5DC;
+  border-radius: 8px;
+  background-color: white;
+  color: #364153;
+  font-family: "Inter", sans-serif;
+  box-sizing: border-box;
+}
+
+.admin-input:focus,
+.admin-select:focus {
+  border-color: #79EFF7;
+  outline: 2px solid rgba(121, 239, 247, 0.25);
+}
+
+.admin-btn {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: "Inter", sans-serif;
+  font-size: 0.875em;
+  font-weight: 600;
+  transition: background-color 0.2s ease;
+}
+
+.admin-btn-primary {
+  background-color: #79EFF7;
+  color: #183133;
+}
+
+.admin-btn-primary:hover {
+  background-color: #87C8CD;
+}
+
+.admin-btn-secondary {
+  background-color: #EEF2F3;
+  color: #4A5565;
+}
+
+.admin-btn-secondary:hover {
+  background-color: #DDE5E6;
+}
+
+.admin-btn-danger {
+  background-color: #FFE2E2;
+  color: #C10007;
+}
+
+.admin-btn-danger:hover {
+  background-color: #FFC9C9;
+}
+
+.admin-btn-view {
+  background-color: #E4FCFD;
+  color: #183133;
+}
+
+.admin-link-button {
+  display: inline-block;
+  text-decoration: none;
+}
+
+.admin-create-button {
+  margin-bottom: 20px;
+}
+
+.admin-table-container {
+  width: 100%;
+  overflow-x: auto;
+  background-color: white;
+  border: 1px solid #E5E7EB;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.admin-table th,
+.admin-table td {
+  padding: 12px 10px;
+  border-bottom: 1px solid #E5E7EB;
+  text-align: center;
+  color: #364153;
+  vertical-align: middle;
+}
+
+.admin-table th {
+  background-color: #EEF9FB;
+  color: #101828;
+  font-weight: 700;
+}
+
+.admin-table tr:last-child td {
+  border-bottom: none;
+}
+
+.admin-table tr:hover td {
+  background-color: #FCFDFD;
+}
+
+.admin-password-cell {
+  max-width: 340px;
+  overflow-wrap: anywhere;
+  font-size: 0.8em;
+}
+
+.admin-actions {
+  white-space: nowrap;
+}
+
+.admin-action-form {
+  display: inline;
+}
+
+.edit-row {
+  display: none;
+  background-color: #F8FAFA;
+}
+
+.admin-create-row td {
+  background-color: #F8FAFA;
+}
+
+.admin-inline-form {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.admin-status {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.8em;
+  font-weight: 700;
+}
+
+.admin-status-active {
+  background-color: #DCFCE7;
+  color: #166534;
+}
+
+.admin-status-disabled {
+  background-color: #FFE2E2;
+  color: #C10007;
+}
+
+.admin-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  margin-top: 20px;
+  color: #4A5565;
+}
+
+.admin-pagination button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Vista de usuario */
+.user-view-card {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 25px;
+  background-color: white;
+  border-radius: 14px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.user-view-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px 30px;
+  margin-bottom: 25px;
+  padding: 15px;
+  background-color: #F1FDFE;
+  border: 1px solid #D9FAFC;
+  border-radius: 10px;
+  color: #364153;
+}
+
+.user-view-info p {
+  margin: 0;
+}
+
+.user-view-subtitle {
+  margin-bottom: 15px;
+  color: #101828;
+  font-family: "Noto Sans Bengali", sans-serif;
+}
+
+.user-view-message {
+  min-width: 280px;
+  text-align: left !important;
+}
+
+
+@media (max-width: 600px) {
+  .admin-page {
+    padding: 85px 12px 30px;
+  }
+
+  .admin-title {
+    font-size: 1.5em;
+  }
+
+  .user-view-card {
+    padding: 15px;
+  }
+
+}

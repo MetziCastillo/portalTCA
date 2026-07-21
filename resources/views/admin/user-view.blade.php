@@ -1,32 +1,47 @@
 @extends('layouts.app')
 
-<br><br><br><br><br>
-<h1>Usuario: {{ $usuario->usuario }}</h1>
+@section('title', 'Detalle del usuario')
+@section('content')
+<div class="admin-page user-view-page">
+    <div class="user-view-card">
+        <h1 class="admin-title">Correo: {{ $usuario->usuario }}</h1>
+        <h1 class="admin-title">Username: {{ $usuario->username ?? 'None' }}</h1>
 
-<p>ID: {{ $usuario->id }}</p>
-<p>Tipo: {{ $usuario->tipo_usuario }}</p>
-<p>Verificado: {{ $usuario->is_verified }}</p>
+        <div class="user-view-info">
+            <p><strong>ID:</strong> {{ $usuario->id }}</p>
+            <p><strong>Tipo:</strong> {{ $usuario->tipo_usuario }}</p>
+            <p><strong>Verificado:</strong> {{ $usuario->is_verified }}</p>
+        </div>
 
-<h2>Temas creados</h2>
+        <h2 class="user-view-subtitle">Temas creados</h2>
 
-<table border="1" width="100%">
-    <tr>
-        <th>ID</th>
-        <th>Titulo</th>
-        <th>Categoria</th>
-        <th>Mensaje</th>
-        <th>Visible</th>
-    </tr>
+        <div class="admin-table-container">
+            <table class="admin-table">
+                <tr>
+                    <th>ID</th>
+                    <th>Titulo</th>
+                    <th>Categoria</th>
+                    <th>Mensaje</th>
+                    <th>Visible</th>
+                </tr>
 
-    @foreach($temas as $t)
-    <tr>
-        <td>{{ $t->id_foro }}</td>
-        <td>{{ $t->titulo }}</td>
-        <td>{{ $t->categoria }}</td>
-        <td>{{ $t->mensaje }}</td>
-        <td>{{ $t->visible ? 'SI' : 'NO' }}</td>
-    </tr>
-    @endforeach
-</table>
+                @foreach($temas as $t)
+                <tr>
+                    <td>{{ $t->id_foro }}</td>
+                    <td>{{ $t->titulo }}</td>
+                    <td>{{ $t->categoria }}</td>
+                    <td class="user-view-message">{{ $t->mensaje }}</td>
+                    <td>
+                        <span class="admin-status {{ $t->visible ? 'admin-status-active' : 'admin-status-disabled' }}">
+                            {{ $t->visible ? 'SI' : 'NO' }}
+                        </span>
+                    </td>
+                </tr>
+                @endforeach
+            </table>
+        </div>
 
-<a href="/admin">Volver</a>
+        <a href="/admin" class="admin-link-button admin-btn admin-btn-primary user-view-back">Volver</a>
+    </div>
+</div>
+@endsection
